@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @Slf4j
 public class AccountController {
-    @Autowired
+
     private final UserService userService;
 
     @GetMapping("/login")

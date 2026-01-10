@@ -56,9 +56,9 @@
 
                 <div class="flex flex-col items-center justify-start p-4 space-y-2">
                     <p class="text-2xl">ЗАГРУЗИТЬ ИЗОБРАЖЕНИЯ</p>
-                    <input name="file1" class="border border-black hover:border-white mt-1 w-70 text-stone-800 cursor-pointer bg-green-300 border border-black rounded" type="file"/>
-                    <input name="file2" class="border border-black hover:border-white mt-1 w-70 text-stone-800 cursor-pointer bg-green-300 border border-black rounded" type="file"/>
-                    <input name="file3" class="border border-black hover:border-white mt-1 w-70 text-stone-800 cursor-pointer bg-green-300 border border-black rounded" type="file"/>
+                    <input name="file1" class="border border-black hover:border-white mt-1 w-70 text-stone-800 cursor-pointer bg-green-300 border border-black rounded" type="file" accept=".png, .jpeg .jpg"/>
+                    <input name="file2" class="border border-black hover:border-white mt-1 w-70 text-stone-800 cursor-pointer bg-green-300 border border-black rounded" type="file" accept=".png, .jpeg .jpg"/>
+                    <input name="file3" class="border border-black hover:border-white mt-1 w-70 text-stone-800 cursor-pointer bg-green-300 border border-black rounded" type="file" accept=".png, .jpeg .jpg"/>
 
 
                 </div>

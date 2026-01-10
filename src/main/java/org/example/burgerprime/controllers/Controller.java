@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class Controller {
 
-    @Autowired
     public final ProductRepository productRepository;
     public final AccountRepository accountRepository;
     @GetMapping("/")
