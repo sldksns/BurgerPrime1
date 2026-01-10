@@ -1,17 +1,20 @@
 package org.example.burgerprime.controllers;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.burgerprime.models.Account;
 import org.example.burgerprime.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @Controller
+@Slf4j
 public class AccountController {
+    @Autowired
     private final UserService userService;
 
     @GetMapping("/login")
@@ -28,15 +31,10 @@ public class AccountController {
     @PostMapping("/registration")
     public String createUser(Account user, Model model) {
         if(!userService.createUser(user)){
-            model.addAttribute("error message", "Пользователь с таким именем уже существует");
+            model.addAttribute("errorMessage", "Пользователь уже существует");
             return "reg";
         }
         userService.createUser(user);
         return "redirect:/login";
-    }
-
-    @GetMapping("/hello")
-    public String securityUrl() {
-        return "hello";
     }
 }

@@ -47,7 +47,7 @@
                 <div class="flex items-center justify-center h-50 w-50 rounded-[50%] border overflow-hidden">
                     <img src="../static/img/vk_logo.png" class="w-50">
                 </div>
-                <p class="text-3xl font-bold text-center mt-5">Имя</p>
+                <p class="text-3xl font-bold text-center mt-5">${account.name}</p>
             </div>
         </div>
 
@@ -55,14 +55,14 @@
         <hr class="border border-1 border-zinc-400 w-360 ml-35">
         <div class="flex justify-center mt-5 w-360 overflow-auto ml-35 space-x-20">
             <#list orders as order>
-                <a href="http://localhost:8080/product/${order.getProduct().getID()}" class="cursor-pointer">
+                <a href="http://localhost:8080/product/${order.getProduct().id}" class="cursor-pointer">
                     <div class="bg-zinc-200  h-full w-full rounded-xl border-4 border-zinc-400 border">
                         <div class="flex h-40 w-40 justify-center items-center rounded-lg bg-zinc-400">
-                            <img class="h-40" src="/images/${order.getProduct().getPreviewImageId()}" alt="Иконка">
+                            <img class="h-40" src="/images/${order.getProduct().previewImageId}" alt="Иконка">
                         </div>
-                        <p style="font-family: 'Ruthless Scetch', sans-serif" class="text-xl text-center mt-3 font-bold text-stone-800">${order.getProduct().getName()}</p>
-                        <p style="font-family: 'Ruthless Scetch', sans-serif" class=" text-red-500 text-center text-xl font-bold">${order.getProduct().getPrice()}</p>
-                        <p class=" text-stone-800 text-center pb-2 text-sm font-bold">${order.getCreatedAt()}</p>
+                        <p style="font-family: 'Ruthless Scetch', sans-serif" class="text-xl text-center mt-3 font-bold text-stone-800">${order.getProduct().name}</p>
+                        <p style="font-family: 'Ruthless Scetch', sans-serif" class=" text-red-500 text-center text-xl font-bold">${order.getProduct().price}</p>
+                        <p class=" text-stone-800 text-center pb-2 text-sm font-bold">${order.createdAt}</p>
                     </div>
                 </a>
             </#list>

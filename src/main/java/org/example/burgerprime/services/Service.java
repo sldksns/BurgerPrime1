@@ -1,10 +1,11 @@
 package org.example.burgerprime.services;
 
 import lombok.AllArgsConstructor;
+import org.example.burgerprime.interfaces.AccountRepository;
 import org.example.burgerprime.interfaces.ProductRepository;
+import org.example.burgerprime.models.Account;
 import org.example.burgerprime.models.Image;
 import org.example.burgerprime.models.Product;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
@@ -12,7 +13,6 @@ import java.io.IOException;
 @org.springframework.stereotype.Service
 public class Service {
     public final ProductRepository productRepository;
-
 
     @Transactional
     public void saveProduct(Product product, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {

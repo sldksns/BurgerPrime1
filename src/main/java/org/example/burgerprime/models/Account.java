@@ -16,8 +16,8 @@ public class Account implements UserDetails {
     @Id
     @GeneratedValue
     private Integer id;
+    @Column(name = "name",unique = true, length = 100)
     private String name;
-    private String email;
     @Column(name = "password", length = 1000)
     private String password;
     private boolean active;
@@ -25,7 +25,13 @@ public class Account implements UserDetails {
     @CollectionTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "author", fetch = FetchType.EAGER)
+    List<Order> orders = new ArrayList<>();
 
+    public void addOrder(Order order) {
+        order.setAuthor(this);
+        orders.add(order);
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
@@ -38,7 +44,7 @@ public class Account implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override

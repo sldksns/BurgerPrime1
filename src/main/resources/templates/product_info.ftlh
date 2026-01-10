@@ -46,20 +46,38 @@
 <main class="bg-[url('../static/img/info_bg.png')] h-400 text-stone-800">
     <h1 class="font-bold text-zinc-200 text-center pt-25 text-4xl">Информация о товаре</h1>
     <div class="w-400 ml-38 mt-7 rounded-lg border border-zinc-400 border-4 h-300 bg-zinc-200">
-        <div class="flex justify-start h-125 w-250 ml-75 mt-10 border">
-            <div class="flex w-200 h-125 overflow-hidden border">
-                <#list images as image>
-                    <img class="h-125 w-200" src="/images/${image.id}" alt="image">
-                </#list>
+        <div class="flex h-125 w-250 ml-75 mt-10 space-x-5">
+            <div class="relative w-250 h-124 overflow-hidden">
+                <div class="flex">
+                    <#list images as image>
+                        <img src="/images/${image.id}" alt="image" class="h-125 w-125" />
+                    </#list>
+                </div>
+
+
             </div>
             <div class="ml-10 space-y-3">
                 <p style="font-family: 'Ruthless Scetch', sans-serif" class="text-4xl font-bold">${product.name}</p>
                 <p>⭐⭐⭐⭐⭐ (120 отзывов)</p>
                 <p class="text-4xl font-bold text-red-500">${product.price} ₽</p>
                 <p class="">Описание: ${product.description}</p>
-                <button class="bg-green-300 font-bold hover:bg-green-400 cursor-pointer h-10 w-50 rounded-lg text-xl">Купить</button>
+                <form action="/order" method="post">
+                    <input id="currentUrl" type="hidden" name="burgerID" value="">
+                    <script>
+                        document.addEventListener('DOMContentLoaded', () => {
+                            let currentUrl = window.location.href;
+                            let burgerIndex = currentUrl.indexOf('product/')
+                            if (burgerIndex !== -1) {
+                                let burgerId = currentUrl.substring(burgerIndex + 'product/'.length);
+                                document.getElementById('currentUrl').value = parseInt(burgerId, 10);
+                            }
+
+                        });
+                    </script>
+                    <button type="submit" class="bg-green-300 font-bold hover:bg-green-400 cursor-pointer h-10 w-50 rounded-lg text-xl">Купить</button>
+                </form>
                 <p>Категория: ${product.category}</p>
-                <p>${product.weight}</p>
+                <p>Вес: ${product.weight}г</p>
             </div>
         </div>
         <h1 class="mt-15 text-center text-4xl">Отзывы</h1>

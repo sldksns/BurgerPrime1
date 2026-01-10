@@ -6,9 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "products")
@@ -23,6 +21,7 @@ public class Product {
     @Column (columnDefinition = "text")
     private String description;
     private String category;
+    private Integer weight;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.EAGER)
     private List<Image> images = new ArrayList<>();
     private Integer previewImageId;

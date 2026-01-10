@@ -3,6 +3,7 @@ package org.example.burgerprime.controllers;
 import lombok.RequiredArgsConstructor;
 import org.example.burgerprime.interfaces.ImageRepository;
 import org.example.burgerprime.models.Image;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.io.ByteArrayInputStream;
 @RestController
 @RequiredArgsConstructor
 public class ImageController {
+    @Autowired
     private final ImageRepository imageRepository;
 
     @GetMapping("/images/{id}")

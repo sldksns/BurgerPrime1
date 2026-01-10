@@ -24,8 +24,8 @@
         }
     </style>
 </head>
-<body class="bg-mainColor text-white bg-stone-900">
-<header class="border-b border-white-500 bg-neutral-700 w-full fixed top-0 z-50">
+<body class="text-white">
+<header class="shadow-xl bg-zinc-400 w-full fixed top-0 z-50">
     <div class="flex justify-center px-4 py-3">
 
         <div class="flex-shrink-0 pr-110 pl-10">
@@ -43,18 +43,20 @@
         </div>
     </div>
 </header>
-    <main class="w-420 bg-zinc-200 h-240 mx-auto pt-40">
-        <div class="flex justify-around pl-20 grid grid-cols-4 gap-x-20 gap-y-10">
-            <a href="http://localhost:8080/product/${product.id}" class="cursor-pointer">
-                <div class="  h-110 w-70 rounded-t-xl">
-                    <div class="flex h-70 w-70 justify-center items-center rounded-xl bg-zinc-400">
-                        <img class="h-40 w-52" src="../static/img/alt_logo.png" alt="Иконка">
+    <main class="w-full bg-zinc-200 pb-10 h-full mx-auto pt-30">
+        <div class="flex justify-around ml-40 grid grid-cols-4 gap-y-10">
+            <#list products as product>
+                <a href="http://localhost:8080/product/${product.id}" class="cursor-pointer">
+                    <div class="  h-110 w-70 rounded-t-xl">
+                        <div class="flex h-70 w-70 justify-center items-center rounded-xl bg-zinc-400">
+                            <img class="h-40 w-52" src="/images/${product.previewImageId}" alt="Иконка">
+                        </div>
+                        <p style="font-family: 'Ruthless Scetch', sans-serif" class="text-3xl mt-3 font-bold text-stone-800">${product.name} </p>
+                        <p class="text-stone-800 text-sm">${product.description}</p>
+                        <p style="font-family: 'Ruthless Scetch', sans-serif" class=" mt-3 text-red-500 text-3xl font-bold">${product.price}₽</p>
                     </div>
-                    <p style="font-family: 'Ruthless Scetch', sans-serif" class="text-3xl font-bold text-stone-800">Classic Cheese</p>
-                    <p class="text-stone-800 text-sm">Cочная говяжья котлета, сыр чеддер, лист салата, помидор, красный лук, фирменный соус, булочка бриошь</p>
-                    <p style="font-family: 'Ruthless Scetch', sans-serif" class=" mt-3 text-red-500 text-3xl font-bold">200₽</p>
-                </div>
-            </a>
+                </a>
+            </#list>
         </div>
     </main>
 <footer class=" bg-zinc-400 h-115 pt-15 pb-10 text-white w-full">
