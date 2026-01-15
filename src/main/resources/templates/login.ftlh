@@ -20,43 +20,43 @@
             }
         </style>
     </head>
-    <body class="bg-[url(../static/img/login_bg.png)] h-full">
-        <main class="flex justify-center items-center w-full h-full ">
+    <body class="bg-[url(../static/img/login_bg.png)] bg-no-repeat h-full">
+        <main class="flex justify-center items-center w-full h-full mb-20">
                 <div class="bg-zinc-200 w-90 md:w-150 lg:w-200 h-155 md:h-200 md:h-150 mt-5 md:mt-10 xl:w-150 mr-0.5 rounded-xl">
-                    <form class="flex grid">
+                    <form class="flex grid" method="post" action="/login">
                         <div class="w-full h-full flex justify-center pt-5 lg:pt-10 pb-5">
                             <img class="w-[25%] md:w-[20%] " src="../static/img/alt_logo.png">
                         </div>
                         <h1 class="text-[200%] md:text-[300%] text-center font-bold">Вход</h1>
                         <div class="mt-10">
                             <div class="flex justify-center w-full h-30 items-center">
-                                <input class="border-b-2 lg:text-[100%] w-[70%] h-[50%] lg:h-[30%] pl-3" placeholder="Введите имя">
+                                <input class="border-b-2 lg:text-[100%] w-[70%] h-[50%] lg:h-[30%] pl-3" name="name" placeholder="Введите имя">
                             </div>
                             <div class="flex justify-center w-full h-30 items-center">
-                                <input class="border-b-2 lg:text-[100%] w-[70%] h-[50%] lg:h-[30%] pl-3" placeholder="Введите пароль">
+                                <input class="border-b-2 lg:text-[100%] w-[70%] h-[50%] lg:h-[30%] pl-3" name="password" placeholder="Введите пароль">
                             </div>
                             <div class="flex justify-center w-full h-30 items-center">
                                 <button type="submit" class="h-[40%] w-[70%] bg-green-300 text-[100%] md:text-[200%] rounded-xl font-bold">Войти</button>
                             </div>
-                            <p class=" font-bold text-center">Если уже зарегистрированны:<a href="/login" class="text-[#34a615] hover:cursor-pointer"> Войти</a></p>
+                            <p class=" font-bold text-center">Если еще не зарегистрированны:<a href="/registration" class="text-[#34a615] hover:cursor-pointer"> Войти</a></p>
                             <p class=" font-bold text-center">Есть вопросы? <a class="text-[#34a615] hover:cursor-pointer" href="https://vk.com/im?entrypoint=community_page&media=&sel=-235216715">Задать</a></p>
                         </div>
 
                     </form>
                 </div>
         </main>
-        <footer class="bg-zinc-200 w-full h-full mt-29 pb-5 md:pb-10">
-            <div class="space-x-3 h-full md:h-100 w-full ">
-                <div class="flex justify-center items-center w-full pb-5 md:pb-10 lg:pb-15 pt-5 md:pt-10 lg:pt-15 space-x-[2%]">
+        <footer class="bg-zinc-200 w-full h-full pb-5 pt-5 md:pb-10">
+            <div class="space-x-3 h-full w-full ">
+                <div class="flex justify-center items-center w-full pb-5 md:pb-10 lg:pb-15 md:pt-10 lg:pt-15 space-x-[2%]">
                     <img class="w-[10%] " src="../static/img/alt_logo.png">
                     <input class="w-[60%] h-6 md:h-8 lg:h-10 rounded-xl border">
-                    <button class="cursor-pointer w-[10%] text-[50%] md:text-[80%] lg:text-[120%] h-6 md:h-8 lg:h-10 bg-green-300 rounded-xl">Отправить</button>
+                    <button class="flex justify-center items-center cursor-pointer w-[15%] text-[45%] md:text-[80%] lg:text-[120%] h-6 md:h-8 lg:h-10 bg-green-300 rounded-xl">Отправить</button>
                 </div>
                 <div class="flex justify-center">
                     <hr class="w-[80%]">
                 </div>
 
-                <div class="flex justify-around w-full h-full text-[70%] md:text-[120%] lg:text-[150%] pt-5 md:pt-10 lg:pt-15 space-y-5 md:space-y-10 lg:space-y-15 ">
+                <div class="flex justify-around w-full h-[60%] text-[70%] md:text-[120%] lg:text-[150%] pt-5 md:pt-10 lg:pt-15 lg:pb-5 ">
 
                     <div>
                         <h1 class="text-[100%] font-bold">Режим работы: </h1>
