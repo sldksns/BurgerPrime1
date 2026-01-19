@@ -2,26 +2,16 @@ package org.example.burgerprime.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.burgerprime.interfaces.AccountRepository;
-import org.example.burgerprime.interfaces.ImageRepository;
 import org.example.burgerprime.interfaces.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.example.burgerprime.models.Account;
-import org.example.burgerprime.models.Image;
-import org.example.burgerprime.models.Order;
 import org.example.burgerprime.models.Product;
-import org.example.burgerprime.services.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.security.Principal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Controller
 @Slf4j

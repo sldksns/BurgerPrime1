@@ -20,8 +20,8 @@
             }
         </style>
     </head>
-    <body class="bg-[url(../static/img/login_bg.png)] bg-no-repeat h-full">
-        <main class="flex justify-center items-center w-full h-full mb-20">
+    <body class="lg:bg-[url(../static/img/login_bg.png)] bg-no-repeat h-full">
+        <main class="flex justify-center items-center md:mb-40 lg:mb-27 w-full h-full mb-27">
                 <div class="bg-zinc-200 w-90 md:w-150 lg:w-200 h-155 md:h-200 md:h-150 mt-5 md:mt-10 xl:w-150 mr-0.5 rounded-xl">
                     <form class="flex grid" method="post" action="/login">
                         <div class="w-full h-full flex justify-center pt-5 lg:pt-10 pb-5">
@@ -29,17 +29,17 @@
                         </div>
                         <h1 class="text-[200%] md:text-[300%] text-center font-bold">Вход</h1>
                         <div class="mt-10">
-                            <div class="flex justify-center w-full h-30 items-center">
-                                <input class="border-b-2 lg:text-[100%] w-[70%] h-[50%] lg:h-[30%] pl-3" name="name" placeholder="Введите имя">
+                            <div class="flex justify-center w-full h-20 lg:h-30 items-center">
+                                <input class="border-b-2 lg:text-[100%] w-[70%] h-[50%] lg:h-[50%] pl-3" name="name" placeholder="Введите имя">
+                            </div>
+                            <div class="flex justify-center w-full h-20 lg:h-30 items-center">
+                                <input class="border-b-2 lg:text-[100%] w-[70%] h-[50%] lg:h-[50%] pl-3" name="password" placeholder="Введите пароль">
                             </div>
                             <div class="flex justify-center w-full h-30 items-center">
-                                <input class="border-b-2 lg:text-[100%] w-[70%] h-[50%] lg:h-[30%] pl-3" name="password" placeholder="Введите пароль">
+                                <button type="submit" class="cursor-pointer h-[40%] w-[70%] bg-green-300 text-[100%] md:text-[200%] rounded-xl font-bold">Войти</button>
                             </div>
-                            <div class="flex justify-center w-full h-30 items-center">
-                                <button type="submit" class="h-[40%] w-[70%] bg-green-300 text-[100%] md:text-[200%] rounded-xl font-bold">Войти</button>
-                            </div>
-                            <p class=" font-bold text-center">Если еще не зарегистрированны:<a href="/registration" class="text-[#34a615] hover:cursor-pointer"> Войти</a></p>
-                            <p class=" font-bold text-center">Есть вопросы? <a class="text-[#34a615] hover:cursor-pointer" href="https://vk.com/im?entrypoint=community_page&media=&sel=-235216715">Задать</a></p>
+                            <p class=" font-bold text-center mt-5">Если еще не зарегистрированны:<a href="/registration" class="text-[#34a615] hover:cursor-pointer"> Войти</a></p>
+                            <p class=" font-bold text-center mt-2">Есть вопросы? <a class="text-[#34a615] hover:cursor-pointer" href="https://vk.com/im?entrypoint=community_page&media=&sel=-235216715">Задать</a></p>
                         </div>
 
                     </form>

@@ -25,78 +25,74 @@
     </style>
 </head>
 <body class="text-white">
-<header class="shadow-xl bg-zinc-400 w-full fixed top-0 z-50">
-    <div class="flex justify-center px-4 py-3">
-
-        <div class="flex-shrink-0 pr-110 pl-10">
-            <a href="http://localhost:8080/"><img style="bottom: -1.1rem" class="hover:cursor-pointer absolute w-25 h-25 left-15" src="../static/img/logo.png" alt="Иконка"></a>
-        </div>
-
-        <div class="flex relative justify-center w-200 h-10 flex-1 mx-4">
-            <input class="w-195 cursor-pointer h-10 absolute px-4 border rounded hover:border-stone-800" type="text" placeholder="Поиск товаров" />
-            <button type="submit" class="border border-black hover:border-white cursor-pointer absolute ml-174 top-0 h-full px-4 bg-green-300 text-stone-800 rounded-lg">Нажать</button>
-        </div>
-
-        <div class="flex items-center space-x-2 flex-shrink-0 pl-95 pr-10">
-
-            <p class="pt-1 text-xl"></p>
-        </div>
-    </div>
-</header>
-    <main class="w-full bg-zinc-200 pb-10 h-full mx-auto pt-30">
-        <div class="flex justify-around ml-40 grid grid-cols-4 gap-y-10">
-            <#list products as product>
-                <a href="http://localhost:8080/product/${product.id}" class="cursor-pointer">
-                    <div class="  h-110 w-70 rounded-t-xl">
-                        <div class="flex h-70 w-70 justify-center items-center rounded-xl bg-zinc-400">
-                            <img class="h-40 w-52" src="/images/${product.previewImageId}" alt="Иконка">
-                        </div>
-                        <p style="font-family: 'Ruthless Scetch', sans-serif" class="text-3xl mt-3 font-bold text-stone-800">${product.name} </p>
-                        <p class="text-stone-800 text-sm">${product.description}</p>
-                        <p style="font-family: 'Ruthless Scetch', sans-serif" class=" mt-3 text-red-500 text-3xl font-bold">${product.price}₽</p>
-                    </div>
-                </a>
-            </#list>
-        </div>
-    </main>
-<footer class=" bg-zinc-400 h-115 pt-15 pb-10 text-white w-full">
-    <div class="space-x-3 h-40 pb-15 flex items-center justify-center w-full ">
-        <a href="/"><img class="h-30 w-39 mr-20" src="../static/img/alt_logo.png" alt="Иконка"></a>
-        <div class="w-60 pt-12">
-            <p class="text-2xl font-bold">Обратная связь:</p>
-            <p>(мы свяжемся с вами в ближайшее время)</p>
-        </div>
-        <form>
-            <input name="email" class="bg-zinc-200 pl-5 border border-zinc-400 border-4 h-12 w-200 rounded-3xl text-stone-800" type="email" placeholder="Email">
-            <button  type="submit" class="bg-green-300 font-bold hover:bg-green-400 cursor-pointer h-10 pl-0.5 w-30 text-stone-800 rounded-3xl">Отправить</button>
+<header class="flex justify-center items-center shadow-xl bg-zinc-400 w-full h-15 fixed top-0 z-50">
+    <a href="http://localhost:8080/"><img class="h-10 absolute left-[5%] top-[17%]" src="../static/img/alt_logo.png"></a>
+    <div class="flex relative items-center lg:w-[35%] w-[50%] h-full ">
+        <form class="flex items-center h-full w-full">
+            <input class="w-full h-[50%] bg-white border border-black rounded-xl text-stone-800 pl-2">
+            <button class="absolute lg:w-[13%] lg:w-[10%] w-[40%] h-[47%] bg-green-300 right-0 rounded-xl text-stone-800 font-bold">Найти</button>
         </form>
     </div>
-    <hr class="border border-zinc-600 border-1 w-425 ml-25">
-    <div class="flex justify-around pt-10 ">
-        <div class="space-y-2">
-            <h1 class="text-3xl font-bold">Режим работы: </h1>
-            <p class="text-xl">Пн-Пт: 10:00 - 22:00</p>
-            <p class="text-xl">Сб-Вс: 11:00 - 23:00</p>
-        </div>
-        <div class="space-y-2">
-            <h1 class="text-3xl font-bold">Наши контакты:</h1>
-            <p class="text-xl">+7 (999) 999-99-99</p>
-            <p class="text-xl">+7 (999) 999-99-99</p>
-            <p class="text-xl">+7 (999) 999-99-99</p>
-        </div>
-        <div class="space-y-2">
-            <h1 class="text-3xl font-bold">Наши cоц. сети:</h1>
-            <div class="flex items-center">
-                <a href="https://vk.com/burgerprime"><img class="cursor-pointer h-10 w-10" src="../static/img/vk_logo.png"></a>
-                <a href="https://vk.com/burgerprime" class="cursor-pointer text-xl ">Сообщество ВКонтакте</a>
+    <div class="absolute overflow-hidden rounded-[50%] h-10 w-10 right-[5%] top-[17%] bg-white">
+        <a href="http://localhost:8080/profile"><img class="h-10 absolute" src="../static/img/vk_logo.png"></a>
+    </div>
+</header>
+<main class="w-full h-full pb-10 bg-zinc-200">
+    <div class="grid px-auto xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-y-10 w-full pt-20 lg:pt-35 h-full">
+        <#list products as product>
+        <a href="http://localhost:8080/product/${product.id}" class="cursor-pointer">
+            <div class="h-110 w-80 bg-zinc-400 rounded-xl mx-auto">
+                <div class="flex justify-center items-center h-55 w-full">
+                    <img class="h-full" src="/images/${product.previewImageId}">
+                </div>
+                <div class="h-[40%] w-full pl-5">
+                    <p style="font-family: 'Ruthless Scetch', sans-serif;" class="text-[200%] text-stone-800 font-bold">${product.name}</p>
+                    <p class="text-stone-800 text-[100%]">${product.description}</p>
+                    <p style="font-family: 'Ruthless Scetch', sans-serif" class=" mt-3 text-red-500 text-[200%] font-bold">${product.price}₽</p>
+                </div>
             </div>
-            <div class="flex pb-1 items-center">
-                <a href="https://vk.com/vkusniysnus"><img class="cursor-pointer h-10 w-10" src="../static/img/vk_logo.png"></a>
-                <a href="https://vk.com/vkusniysnus" class="cursor-pointer text-xl ">Администратор</a>
+        </a>
+        </#list>
+    </div>
+</main>
+<footer class="bg-zinc-400 w-full h-full pb-5 pt-5 md:pb-10">
+    <div class="space-x-3 h-full w-full ">
+        <div class="flex justify-center items-center w-full pb-5 md:pb-10 lg:pb-15 md:pt-10 lg:pt-15 space-x-[2%]">
+            <img class="w-[10%] " src="../static/img/alt_logo.png">
+            <input class="w-[60%] h-6 md:h-8 lg:h-10 rounded-xl border">
+            <button class="flex justify-center items-center cursor-pointer w-[15%] text-[50%] md:text-[80%] lg:text-[120%] h-6 md:h-8 lg:h-10 bg-green-300 rounded-xl text-stone-800 font-bold">Отправить</button>
+        </div>
+        <div class="flex justify-center">
+            <hr class="w-[80%]">
+        </div>
+
+        <div class="flex justify-around w-full h-[60%] text-[70%] md:text-[120%] lg:text-[150%] pt-5 md:pt-10 lg:pt-15 lg:pb-5 ">
+
+            <div>
+                <h1 class="text-[100%] font-bold">Режим работы: </h1>
+                <p class="">Пн-Пт: 10:00 - 22:00</p>
+                <p class="">Сб-Вс: 11:00 - 23:00</p>
             </div>
-            <div class="flex pl-2 items-center">
-                <a href="https://t.me/burgerprimerestraunt"><img class="cursor-pointer h-6 w-6" src="../static/img/tg_logo.png"></a>
-                <a href="https://t.me/burgerprimerestraunt" class="cursor-pointer text-xl ml-2">Канал в Telegram</a>
+            <div>
+                <h1 class="font-bold">Наши контакты:</h1>
+                <p class="">+7 (999) 999-99-99</p>
+                <p class="">+7 (999) 999-99-99</p>
+                <p class="">+7 (999) 999-99-99</p>
+            </div>
+            <div>
+                <h1 class="font-bold">Наши cоц. сети:</h1>
+                <div class="flex items-center">
+                    <a href="https://vk.com/burgerprime"><img class="cursor-pointer h-3 lg:h-10" src="../static/img/vk_logo.png"></a>
+                    <a href="https://vk.com/burgerprime" class="cursor-pointer">Сообщество ВКонтакте</a>
+                </div>
+                <div class="flex pb-1 items-center">
+                    <a href="https://vk.com/vkusniysnus"><img class="cursor-pointer h-3 lg:h-10" src="../static/img/vk_logo.png"></a>
+                    <a href="https://vk.com/vkusniysnus" class="cursor-pointer  ">Администратор</a>
+                </div>
+                <div class="flex items-center ml-0.5 lg:ml-2 lg:space-x-2">
+                    <a href="https://t.me/burgerprimerestraunt"><img class="cursor-pointer h-2.5 lg:h-6 " src="../static/img/tg_logo.png"></a>
+                    <a href="https://t.me/burgerprimerestraunt" class="cursor-pointer ">Канал в Telegram</a>
+                </div>
             </div>
         </div>
     </div>
