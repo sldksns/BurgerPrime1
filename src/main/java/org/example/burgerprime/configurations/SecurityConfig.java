@@ -23,7 +23,7 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/registration",
+                                "/registration","/","/menu",
                                 "/static/**",
                                 "/images/**"
                         ).permitAll()

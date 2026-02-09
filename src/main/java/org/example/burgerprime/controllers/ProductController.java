@@ -31,6 +31,11 @@ public class ProductController {
         model.addAttribute("images", product.getImages());
         return "product_info";
     }
+    @GetMapping("/menu")
+    public String products(Model model){
+        model.addAttribute("products", productRepository.findAll());
+        return "menu";
+    }
     @PostMapping("/add/product")
     public String addProduct(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2,
                              @RequestParam("file3") MultipartFile file3, Product product) throws IOException {

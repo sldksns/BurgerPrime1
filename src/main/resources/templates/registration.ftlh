@@ -39,20 +39,19 @@
         <main class="flex justify-center bg-[#FFF9EE] h-full min-h-screen w-full pt-15 pb-45">
             <div class="w-[361px] h-full">
                 <div class="w-full mt-[114px] ">
-                    <p style="font-family: 'MontserratAlternates-Bold';" class="text-[32px] text-[#D5552E] text-center">Вход</p>
-                    <div class="bg-[#F0E4CB] w-full h-full mt-[16px] rounded-[24px] shadow-2xl py-[32px]">
-                        <form method="POST" action="/login" class="w-full space-y-[16px] px-[42px]">
+                    <p style="font-family: 'MontserratAlternates-Bold';" class="text-[32px] text-[#D5552E] text-center">Регистрация</p>
+                    <div class="bg-[#F0E4CB] w-full h-[394px] mt-[16px] rounded-[24px] shadow-2xl pt-[32px] ">
+                        <form method="POST" action="/registration" class="w-full space-y-[16px] px-[42px]">
                             <input name="name" style="font-family: 'Montserrat-Medium';" class="bg-white w-full h-[38px] rounded-[8px] shadow-2xl text-[18px] px-[16px]" type="text" name="" id="" placeholder="Введите имя" required>
                             <input name="password" id="password_input" style="font-family: 'Montserrat-Medium';" class="bg-white w-full h-[38px] rounded-[8px] shadow-2xl text-[18px] px-[16px]" type="password" name="" id="" placeholder="Введите пароль" required>
-                            <button class="bg-[#1D342C] h-[38px] w-full rounded-[8px] shadow-2xl text-white text-[18px]">Войти</button>       
+                            <input id="confirm_password_input" style="font-family: 'Montserrat-Medium';" class="bg-white w-full h-[38px] rounded-[8px] shadow-2xl text-[18px] px-[16px]" type="password" name="" id="" placeholder="Подтвердите пароль" required>
+                            <button class="bg-[#1D342C] h-[38px] w-full rounded-[8px] shadow-2xl text-white text-[18px]">Зарегистрироваться</button>       
+                            <script src="../static/js/password_check.js"></script>
                         </form>
-                        <div class="w-full space-y-[16px]"></div>
-                            <p style="font-family: 'Montserrat-Bold';" class="text-[#D5552E] text-center text-[18px] mt-[16px]">или</p>
+                        <div class="w-full space-y-[16px]">
+                            <p style="font-family: 'Montserrat-Bold';" class="text-[#D5552E] text-center text-[18px]">или</p>
                             <a class="flex justify-between items-center bg-[#1D342C] h-[38px] w-[277px] rounded-[4px] shadow-2xl text-white text-[18px] py-[8px] pl-[29px] pr-[36px] mx-auto mt-[16px]">Войти с помощью<img src="../static/img/google_icon.png"></a>
-                            <p style="font-family: 'Montserrat-Bold';" class=" text-[18px] text-center text-[#D5552E] mt-[16px]">Не зарегистрированы?</p>
-                            <div class="w-full flex justify-center">
-                            <a style="font-family: 'Montserrat-Bold';" href="/registration" class="text-[#1D342C] text-[18px] mt-[8px]">Зарегистрироваться</a>
-                            </div>
+                            <p style="font-family: 'Montserrat-Bold';" class="flex text-[18px] ml-5 text-[#D5552E] mt-[16px]">Уже зарегистрированы?&nbsp;<a href="/login" class="text-[#1D342C]">Войти</a></p>
                         </div>
                     </div>
                 </div>

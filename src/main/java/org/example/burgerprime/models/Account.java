@@ -23,18 +23,23 @@ public class Account implements UserDetails {
     @Column(name = "password", length = 1000)
     private String password;
     private boolean active;
-    private Integer avatarId;
-    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
-    private Image avatar;
     @OneToOne(mappedBy = "account",cascade = CascadeType.ALL)
     private Basket basket;
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
+    private AccountInformation account_info;
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Order> orders;
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
-
+    @PrePersist
+    public void createInfo(){
+        AccountInformation accountInformation = new AccountInformation();
+        accountInformation.setAccount(this);
+        accountInformation.setDisplayed_name(this.name);
+        this.account_info = accountInformation;
+    }
 
     public Account() {
     }

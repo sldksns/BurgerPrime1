@@ -1,10 +1,12 @@
 package org.example.burgerprime.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.example.burgerprime.interfaces.AccountInformationRepository;
 import org.example.burgerprime.interfaces.AccountRepository;
 import org.example.burgerprime.interfaces.BasketRepository;
 import org.example.burgerprime.interfaces.ProductRepository;
 import org.example.burgerprime.models.Account;
+import org.example.burgerprime.models.AccountInformation;
 import org.example.burgerprime.models.Basket;
 import org.example.burgerprime.models.Product;
 import org.springframework.security.core.Authentication;
@@ -24,6 +26,29 @@ public class BasketController {
     public final BasketRepository basketRepository;
     public final AccountRepository accountRepository;
     public final ProductRepository productRepository;
+    private final AccountInformationRepository accountInformationRepository;
+    @GetMapping("basket")
+    public String basket(Authentication authentication, Model model) {
+        int sum = 0;
+        if (authentication != null) {
+            String username = authentication.getName();
+            Account account = accountRepository.findByName(username);
+            Basket basket = basketRepository.findByAccount(account);
+            AccountInformation accountInformation = accountInformationRepository.findByAccount(account);
+            if (basket == null) {
+                basket = new Basket();
+                basket.setAccount(account);
+            }
+            for (Product product : basket.getProducts()) {
+                sum += product.getPrice();
+            }
+            model.addAttribute("accountInformation", accountInformation);
+            model.addAttribute("products", basket.getProducts());
+            model.addAttribute("sum", sum);
+            return "basket";
+        }
+        return "login";
+    }
     @PostMapping("basket/add_product")
     public String addToBasket(@RequestParam Integer productId,
                               Authentication authentication,
@@ -70,5 +95,16 @@ public class BasketController {
         }
 
         return "redirect:/basket";
+    }
+    @PostMapping("basket/clear")
+    public void clearBasket(Authentication authentication) {
+        if (authentication != null) {
+            String username = authentication.getName();
+            Account account = accountRepository.findByName(username);
+            Basket basket = basketRepository.findByAccount(account);
+            if (basket != null) {
+                basket.clearBasket();
+            }
+        }
     }
 }

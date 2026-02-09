@@ -1,54 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="../static/img/favicon.ico" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>BurgerPrime</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        @font-face {
-            font-family: 'Lato';
-            src: url("../static/fonts/Lato-Regular.ttf") format("truetype");
-        }
-        @font-face {
-            font-family: 'Montserrat';
-            src: url("../static/fonts/Montserrat-Regular.ttf") format("truetype");
-        }
-        body {
-            font-family: 'Montserrat', sans-serif;
-        }
-    </style>
-</head>
-<body class="bg-zinc-200">
-<header class="flex justify-center items-center shadow-xl bg-zinc-400 w-full h-15 fixed top-0 z-50">
-    <a href="http://192.168.0.101:8080/"><img class="h-10 absolute left-[5%] top-[17%]" src="../static/img/alt_logo.png"></a>
-    <div class="flex relative items-center lg:w-[35%] w-[50%] h-full ">
-        <form class="flex items-center h-full w-full">
-            <input class="w-full h-[50%] bg-white border border-black rounded-xl text-stone-800 pl-2">
-            <button class="absolute lg:w-[13%] lg:w-[10%] w-[40%] h-[50%] bg-green-300 right-0 rounded-xl border border-black text-stone-800 font-bold">Найти</button>
-        </form>
-    </div>
-    <div class="flex items-center justify-center absolute overflow-hidden rounded-[50%] h-10 w-10 right-[5%] top-[17%] bg-white">
-        <a href="http://192.168.0.101:8080/profile">
-            <#if account.avatarId??>
-            <img class="h-10" src="/images/${account.avatarId}" alt="">
-        </#if>
-        </a>
-    </div>
-</header>
-<main class="h-full w-full min-h-screen pt-30">
-    <#list orders as order>
-        <p class="text-center">Заказ номер: ${order.id}</p>
-        <#list order.getProducts() as product>
-            <p class="text-center">${product.name} ${product.price}₽</p>
-        </#list>
-        <p class="text-center">Итого: ${order.totalPrice()}₽</p>
-        <hr>
-    </#list>
-</main>
-
-
-</body>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Main</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <style>
+            @font-face {
+                font-family: 'MontserratAlternates-Bold';
+                src: url("../static/fonts/MontserratAlternates-Bold.ttf") format("truetype");
+            }
+            @font-face {
+                font-family: 'MontserratAlternates-SemiBold';
+                src: url("../static/fonts/MontserratAlternates-SemiBold.ttf") format("truetype");
+            }
+            @font-face {
+                font-family: 'Montserrat-Medium';
+                src: url("../static/fonts/Montserrat-Medium.ttf") format("truetype");
+            }
+            @font-face {
+                font-family: 'Montserrat-Bold';
+                src: url("../static/fonts/Montserrat-Bold.ttf") format("truetype");
+            }
+            body {
+                font-family: 'MontserratAlternates-SemiBold', sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <header class="flex fixed justify-center items-center h-15 w-full bg-[#D5552E] pt-2 pb-2 space-x-1 rounded-b-[24px] shadow-xl">
+            <a href="/profile"><img class="absolute top-[17px] left-[16px]" src="../static/img/reversed_arrow.png" alt=""></a>
+            <img class="" src="/static/img/alt_logo 1.png">
+            <p class="text-[20px] text-white">BurgerPrime</p>
+        </header>
+        <main class="flex justify-center bg-[#FFF9EE] h-full min-h-screen w-full pt-15 pb-45">
+            <div class="w-[361px] h-full">
+                <div class="grid w-full py-[16px] space-y-[32px] mt-[16px]">
+                    <#list orders as order>
+                        <div class="bg-[#F0E4CB] rounded-[24px] px-[16px] text-[20px] pb-[16px]">
+                            <div style="font-family: 'MontserratAlternates-Bold';" class="flex justify-between items-center">
+                                <p class="text-[#0BA615] mt-[8px]">Выполненный заказ</p>
+                                <span class="bg-[#D5552E] py-[6px] px-[36px] rounded-[16px] text-white mt-[10px]">${order.id}</span>
+                            </div>
+                            <p style="font-family: 'Montserrat-Medium';" class="text-[18px]">${order.date}</p>
+                            <p style="font-family: 'Montserrat-Medium';" class="text-[18px]">${order.address}</p>
+                            <div class="w-full mt-[32px]">
+                                <#list order.getProducts() as product>
+                                    <div class="w-full flex justify-between">
+                                        <p style="font-family: 'Montserrat-Medium';" class="text-[18px]">${product.name}</p>
+                                        <p style="font-family: 'Montserrat-Medium';" class="text-[18px] text-[#D5552E]">${product.quantity} x ${product.price} руб.</p>
+                                    </div>
+                                </#list>
+                            </div>
+                            <div class="flex justify-between w-full mt-[32px]">
+                                <p style="font-family: 'Montserrat-Bold';" class="text-[20px] text-[#1D342C]">Итого</p>
+                                <p style="font-family: 'Montserrat-Bold';" class="text-[20px] text-[#1D342C]">${order.totalPrice()} руб.</p>
+                            </div>
+                        </div>
+                    </#list>
+                </div>
+            </div>
+        </main>
+        <div class="flex justify-around items-center w-full h-15 bg-[#F0E4CB] fixed bottom-0 rounded-t-[16px] shadow-xl">
+            <a href="/"><img src="/static/img/main.png" alt=""></a>
+            <a href="/menu"><img src="/static/img/menu.png" alt=""></a>
+            <a href="/basket"><img src="/static/img/basket.png" alt=""></a>
+            <a href="/profile"><img src="/static/img/profile_active.png" alt=""></a>
+        </div>
+    </body>
 </html>

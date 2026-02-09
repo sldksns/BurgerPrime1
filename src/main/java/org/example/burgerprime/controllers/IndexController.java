@@ -21,14 +21,8 @@ public class IndexController {
     public final ProductRepository productRepository;
     public final AccountRepository accountRepository;
     @GetMapping("/")
-    public String index(Authentication authentication, Model model) {
-        Object principal = authentication.getPrincipal();
-        String username = ((UserDetails) principal).getUsername();
-        Account account = accountRepository.findByName(username);
-        List<Product> products = productRepository.findAll();
-        model.addAttribute("products", products);
-        model.addAttribute("account", account);
-        return "index";
+    public String index( Model model) {
+        return "main";
     }
 
 }

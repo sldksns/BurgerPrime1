@@ -19,9 +19,6 @@ public class Image {
     private byte[] data;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     private Product product;
-    @OneToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
     public Image() {
     }
 

@@ -2,12 +2,10 @@ package org.example.burgerprime.controllers;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.burgerprime.interfaces.AccountInformationRepository;
 import org.example.burgerprime.interfaces.AccountRepository;
 import org.example.burgerprime.interfaces.BasketRepository;
-import org.example.burgerprime.models.Account;
-import org.example.burgerprime.models.Basket;
-import org.example.burgerprime.models.Image;
-import org.example.burgerprime.models.Product;
+import org.example.burgerprime.models.*;
 import org.example.burgerprime.services.Service;
 import org.example.burgerprime.services.UserService;
 import org.springframework.security.core.Authentication;
@@ -30,6 +28,7 @@ public class AccountController {
     private final UserService userService;
     private final AccountRepository accountRepository;
     private final BasketRepository basketRepository;
+    private final AccountInformationRepository accountInformationRepository;
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -37,7 +36,7 @@ public class AccountController {
 
     @GetMapping("/registration")
     public String registration() {
-        return "reg";
+        return "registration";
     }
 
 
@@ -45,32 +44,20 @@ public class AccountController {
     public String createUser(Account user, Model model) {
         if(!userService.createUser(user)){
             model.addAttribute("errorMessage", "Пользователь уже существует");
-            return "reg";
+            return "registration";
         }
         userService.createUser(user);
         return "redirect:/login";
     }
     @GetMapping("/profile")
     public String profile( Model model, Authentication authentication) {
-        int kkal = 0;
-        int amountProducts = 0;
-        int allPrice = 0;
         Object principal = authentication.getPrincipal();
 
         if (principal instanceof UserDetails) {
             String username = ((UserDetails) principal).getUsername();
             Account account = accountRepository.findByName(username);
-            model.addAttribute("account", account);
-            Basket basket = basketRepository.findByAccount(account);
-            if (basket != null) {
-                model.addAttribute("basketProducts", basket.getProducts());
-                for(Product product : basket.getProducts()){
-                    allPrice +=product.getPrice();
-                    amountProducts += 1;
-                }
-                model.addAttribute("amountProducts", amountProducts);
-                model.addAttribute("allPrice", allPrice);
-            }
+            AccountInformation accountInformation = accountInformationRepository.findByAccount(account);
+            model.addAttribute("accountInformation", accountInformation);
             return "profile";
         }
         return "profile";
@@ -85,20 +72,30 @@ public class AccountController {
         log.info("User {} changed name to {}", username, new_name);
         return "redirect:/login";
     }
-
-    @PostMapping("/profile/edit_avatar")
-    public String editAvatar(Authentication authentication, @RequestParam("file") MultipartFile file) throws IOException {
-        Image avatar;
+    @PostMapping("/profile/add_address")
+    public String addAddress(Authentication authentication, String address) {
         Object principal = authentication.getPrincipal();
         String username = ((UserDetails) principal).getUsername();
         Account account = accountRepository.findByName(username);
-        if (file.getSize() != 0) {
-            avatar = service.toImageEntity(file);
-            account.setAvatar(avatar);
-        }
-        Account accountFromDb = accountRepository.save(account);
-        accountFromDb.setAvatarId(accountFromDb.getAvatar().getId());
-        accountRepository.save(account);
-        return "redirect:/login";
+        AccountInformation accountInformation = accountInformationRepository.findByAccount(account);
+        accountInformation.setAddress(address);
+        accountInformationRepository.save(accountInformation);
+        return "redirect:/basket";
     }
+
+//    @PostMapping("/profile/edit_avatar")
+//    public String editAvatar(Authentication authentication, @RequestParam("file") MultipartFile file) throws IOException {
+//        Image avatar;
+//        Object principal = authentication.getPrincipal();
+//        String username = ((UserDetails) principal).getUsername();
+//        Account account = accountRepository.findByName(username);
+//        if (file.getSize() != 0) {
+//            avatar = service.toImageEntity(file);
+//            account.setAvatar(avatar);
+//        }
+//        Account accountFromDb = accountRepository.save(account);
+//        accountFromDb.setAvatarId(accountFromDb.getAvatar().getId());
+//        accountRepository.save(account);
+//        return "redirect:/login";
+//    }
 }

@@ -1,36 +1,69 @@
 package org.example.burgerprime.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.example.burgerprime.interfaces.AccountRepository;
-import org.example.burgerprime.interfaces.OrderRepository;
-import org.example.burgerprime.models.Account;
-import org.example.burgerprime.models.Order;
-import org.example.burgerprime.models.Product;
+import lombok.extern.slf4j.Slf4j;
+import org.example.burgerprime.interfaces.*;
+import org.example.burgerprime.models.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-
+import java.util.Map;
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class OrderController {
     public final OrderRepository orderRepository;
     public final AccountRepository accountRepository;
+    public final ProductRepository productRepository;
+    private final BasketRepository basketRepository;
+    private final AccountInformationRepository accountInformationRepository;
+
     @PostMapping("/order")
-    public String order(Authentication authentication) {
-        String username = authentication.getName();
+    public String order(Authentication authentication, @RequestBody Map<String, Object> orderData) {
+        Object principal = authentication.getPrincipal();
+        String username = ((UserDetails) principal).getUsername();
         Account account = accountRepository.findByName(username);
-        List<Product> products = account.getBasket().getProducts();
-        Order order = new Order();
-        order.setAccount(account);
-        order.addProducts(products);
-        account.getBasket().clearBasket();
-        orderRepository.save(order);
-        return "redirect:/profile";
+        AccountInformation accountInformation = accountInformationRepository.findByAccount(account);
+        Order new_order = new Order();
+        new_order.setAccount(account);
+        new_order.setAddress(accountInformation.getAddress());
+        Basket basket = basketRepository.findByAccount(account);
+        if (basket != null) {
+            basket.clearBasket();
+            basketRepository.save(basket);
+            log.info("Basket cleared for account ID: " + account.getId());
+        }
+
+        if (orderData != null && !orderData.isEmpty()) {
+            orderData.forEach((key, value) -> {
+                try {
+                    int productId = Integer.parseInt(key);
+                    int quantity = Integer.parseInt(value.toString());
+
+                    if (quantity > 0) {
+                        Product product = productRepository.getProductById(productId);
+                        if (product != null) {
+                            new_order.addProduct(product, quantity);
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid format for key: " + key + ", value: " + value);
+                }
+            });
+        }
+
+        System.out.println("Products in order before save: " + new_order.getProducts().size());
+
+        orderRepository.save(new_order);
+
+
+        return "redirect:/menu";
     }
     @GetMapping("/orders")
     public String getOrders(Authentication authentication,Model model){
@@ -38,7 +71,7 @@ public class OrderController {
         String username = ((UserDetails) principal).getUsername();
         Account account = accountRepository.findByName(username);
         model.addAttribute("account", account);
-        model.addAttribute("orders", orderRepository.findAll());
+        model.addAttribute("orders", orderRepository.findByAccount(account));
 
         return "orders";
     }
