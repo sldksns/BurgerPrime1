@@ -24,11 +24,27 @@ import java.io.IOException;
 @Controller
 @Slf4j
 public class AccountController {
-    private final Service service;
     private final UserService userService;
     private final AccountRepository accountRepository;
-    private final BasketRepository basketRepository;
     private final AccountInformationRepository accountInformationRepository;
+    @GetMapping("/profile/datas")
+    public String profileData() {
+        return "datas";
+    }
+    @PostMapping("/account/add_data")
+    public String addData(Authentication authentication, String displayed_name, String phone_number, String gender, String email, String date_of_birth) {
+        Object principal = authentication.getPrincipal();
+        String username = ((UserDetails) principal).getUsername();
+        Account account = accountRepository.findByName(username);
+        AccountInformation accountInformation = accountInformationRepository.findByAccount(account);
+        accountInformation.setDisplayed_name(displayed_name);
+        accountInformation.setPhone_number(phone_number);
+        accountInformation.setGender(gender);
+        accountInformation.setEmail(email);
+        accountInformation.setDate_of_birth(date_of_birth);
+        accountInformationRepository.save(accountInformation);
+        return "redirect:/profile";
+    }
     @GetMapping("/login")
     public String login() {
         return "login";

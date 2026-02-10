@@ -6,6 +6,7 @@ import lombok.Data;
 @Entity
 @Table(name = "accounts_info")
 @Data
+
 public class AccountInformation {
     @Id
     @GeneratedValue
@@ -13,6 +14,9 @@ public class AccountInformation {
     private String displayed_name;
     private String address;
     private String phone_number;
+    private String email;
+    private String gender;
+    private String date_of_birth;
     @OneToOne
     @JoinColumn(name = "avatar_id")
     private Image avatar;

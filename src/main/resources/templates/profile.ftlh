@@ -47,7 +47,7 @@
                     <p style="font-family: 'MontserratAlternates-Bold';" class="text-center text-[20px] mt-[16px] text-[#D5552E]">${accountInformation.displayed_name}</p>
                     <div class="w-full flex justify-center">
                         <div class="w-[300px] flex justify-between mt-[16px] space-x-[16px]">
-                            <a href="">
+                            <a href="/profile/datas">
                                 <div>
                                     <div class="w-full flex justify-center mb-[8px]">
                                         <img src="../static/img/datas.png" alt="">
