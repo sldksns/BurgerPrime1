@@ -39,8 +39,16 @@
                     <#list orders as order>
                         <div class="bg-[#F0E4CB] rounded-[24px] px-[16px] text-[20px] pb-[16px]">
                             <div style="font-family: 'MontserratAlternates-Bold';" class="flex justify-between items-center">
-                                <p class="text-[#0BA615] mt-[8px]">Выполненный заказ</p>
-                                <span class="bg-[#D5552E] py-[6px] px-[36px] rounded-[16px] text-white mt-[10px]">${order.id}</span>
+                                <#if order.status == "Выполнен">
+                                    <p class="text-[#0BA615] mt-[8px]">${order.status}</p>
+                                </#if>
+                                <#if order.status == "В процессе доставки">
+                                    <p class="text-[#D5552E] mt-[8px]">${order.status}</p>
+                                </#if>
+                                <#if order.status == "Отменен">
+                                    <p class="text-[#FF0000] mt-[8px]">${order.status}</p>
+                                </#if>
+                                <span class="bg-[#D5552E] py-[6px] w-[81px] text-center rounded-[16px] text-white mt-[10px]">${order.id}</span>
                             </div>
                             <p style="font-family: 'Montserrat-Medium';" class="text-[18px]">${order.date}</p>
                             <p style="font-family: 'Montserrat-Medium';" class="text-[18px]">${order.address}</p>

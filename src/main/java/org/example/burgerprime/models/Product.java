@@ -27,10 +27,9 @@ public class Product {
     private Integer previewImageId;
     private LocalDateTime createdAt;
 
-
     @PrePersist
     private void init(){
-        createdAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
     }
 
 

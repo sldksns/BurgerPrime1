@@ -144,11 +144,16 @@
                             <p style="font-family: 'MontserratAlternates-Bold';" class="text-[32px] text-[#D5552E] text-center mt-[32px]">Корзина пуста</p>
                     </#list>
                     <script src="../static/js/basket_counter.js"></script>
-                <div class="flex justify-between items-center px-[16px] h-[76px] rounded-[24px] bg-[#F0E4CB] fixed bottom-[76px] w-[361px]">
-                    <p id="final_cost" style="font-family: 'MontserratAlternates-Bold';" class="text-[24px] text-[#1D342C]">${sum} руб.</p>
-                    <button id="order_button" class="bg-[#1D342C] w-[126px] h-[46px] text-white rounded-[8px] text-[18px]">Заказать</button>
+                    <div class="flex justify-between items-center px-[16px] h-[76px] rounded-[24px] bg-[#F0E4CB] fixed bottom-[76px] w-[361px]">
+                        <p id="final_cost" style="font-family: 'MontserratAlternates-Bold';" class="text-[24px] text-[#1D342C]">${sum} руб.</p>
+                        <#if accountInformation.address??>
+                            <button id="order_button" class="bg-[#1D342C] w-[126px] h-[46px] text-white rounded-[8px] text-[18px]">Заказать</button>
+                            <#else>
+                            <button id="fake_order_button" class="bg-[#1D342C] w-[126px] h-[46px] text-white rounded-[8px] text-[18px]">Заказать</button>
+                        </#if>
+                    </div>
+                    <script src="../static/js/basket_createorder.js"></script>
                 </div>
-                <script src="../static/js/basket_createorder.js"></script>
             </div>
         </main>
         <div id="modal" class="fixed flex justify-center items-center bg-black/50 w-screen min-h-screen hidden top-0 left-0">

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.function.Consumer;
 
 
 @AllArgsConstructor
@@ -32,18 +33,49 @@ public class AccountController {
         return "datas";
     }
     @PostMapping("/account/add_data")
-    public String addData(Authentication authentication, String displayed_name, String phone_number, String gender, String email, String date_of_birth) {
+    public String addData(Authentication authentication,
+                          String displayed_name,
+                          String phone_number,
+                          String gender,
+                          String email,
+                          String date_of_birth) {
+
         Object principal = authentication.getPrincipal();
         String username = ((UserDetails) principal).getUsername();
         Account account = accountRepository.findByName(username);
-        AccountInformation accountInformation = accountInformationRepository.findByAccount(account);
-        accountInformation.setDisplayed_name(displayed_name);
-        accountInformation.setPhone_number(phone_number);
-        accountInformation.setGender(gender);
-        accountInformation.setEmail(email);
-        accountInformation.setDate_of_birth(date_of_birth);
-        accountInformationRepository.save(accountInformation);
+        AccountInformation existingInfo = accountInformationRepository.findByAccount(account);
+
+        AccountInformation newAccountInfo = new AccountInformation();
+
+        newAccountInfo.setId(existingInfo.getId());
+        newAccountInfo.setAccount(account);
+        newAccountInfo.setAddress(existingInfo.getAddress());
+
+        userService.updateIfNotEmpty(displayed_name, existingInfo.getDisplayed_name(),
+                newAccountInfo::setDisplayed_name);
+        userService.updateIfNotEmpty(phone_number, existingInfo.getPhone_number(),
+                newAccountInfo::setPhone_number);
+        userService.updateIfNotEmpty(gender, existingInfo.getGender(),
+                newAccountInfo::setGender);
+        userService.updateIfNotEmpty(email, existingInfo.getEmail(),
+                newAccountInfo::setEmail);
+        userService.updateIfNotEmpty(date_of_birth, existingInfo.getDate_of_birth(),
+                newAccountInfo::setDate_of_birth);
+
+        accountInformationRepository.save(newAccountInfo);
         return "redirect:/profile";
+    }
+    @GetMapping("/delete_account")
+    public String deleteAccount(Authentication authentication) {
+        Object principal = authentication.getPrincipal();
+        String username = ((UserDetails) principal).getUsername();
+        Account account = accountRepository.findByName(username);
+        accountRepository.delete(account);
+        return "redirect:/login";
+    }
+    @GetMapping("/profile/settings")
+    public String settings() {
+        return "settings";
     }
     @GetMapping("/login")
     public String login() {

@@ -8,6 +8,8 @@ import org.example.burgerprime.models.enums.Role;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.function.Consumer;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -30,6 +32,13 @@ public class UserService {
             return true;
         }else{
             return false;
+        }
+    }
+    public void updateIfNotEmpty(String newValue, String oldValue, Consumer<String> setter) {
+        if (newValue != null && !newValue.trim().isEmpty()) {
+            setter.accept(newValue.trim());
+        } else {
+            setter.accept(oldValue);
         }
     }
 }

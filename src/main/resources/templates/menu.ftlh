@@ -47,64 +47,80 @@
                 <div class="grid grid-col-1 w-full mt-[16px]">
                     <#list products as product>
                         <#if product.category == "Бургер">
-                            <div class="w-full h-[413px] bg-[#F0E4CB] rounded-[24px] shadow-xl mb-[32px]">
+                            <div class="w-[374px] mx-auto h-[413px] bg-[#F0E4CB] rounded-[24px] shadow-xl mb-[32px]">
                                 <img class="mx-auto my-[16px]" src="/images/${product.previewImageId}">
                                 <p style="font-family: 'MontserratAlternates-Bold';" class="text-center text-[#D5552E] text-[32px] mb-[16px]">${product.name}</p>
                                 <div class="flex justify-center space-x-[92px] pb-[16px]">
                                     <p style="font-family: 'MontserratAlternates-Bold';" class="text-[32px] text-[#1D342C]">${product.price} руб.</p>
-                                    <img class="plus" src="../static/img/plus.png" data-product-id="${product.id}" alt="">
+                                    <#if basketProductsId?has_content && basketProductsId?seq_contains(product.id)>
+                                        <img src="../static/img/ready.png">
+                                        <#else>
+                                        <button class="plus" data-product-id="${product.id}"><img src="../static/img/plus.png" alt=""></button>
+                                    </#if>
                                 </div>
                             </div>
                         </#if>
+
                     </#list>
                 </div>
                 <p id="drinks" style="font-family: 'MontserratAlternates-Bold';" class="text-[32px] text-[#D5552E] scroll-mt-31">Напитки</p>
                 <div class="grid grid-col-1 w-full mt-[16px]">
                     <#list products as product>
                         <#if product.category == "Напиток">
-                            <div class="w-full h-[413px] bg-[#F0E4CB] rounded-[24px] shadow-xl mb-[32px]">
+                            <div class="w-[374px] mx-auto h-[413px] bg-[#F0E4CB] rounded-[24px] shadow-xl mb-[32px]">
                                 <img class="mx-auto my-[16px]" src="/images/${product.previewImageId}">
                                 <p style="font-family: 'MontserratAlternates-Bold';" class="text-center text-[#D5552E] text-[32px] mb-[16px]">${product.name}</p>
                                 <div class="flex justify-center space-x-[92px] pb-[16px]">
                                     <p style="font-family: 'MontserratAlternates-Bold';" class="text-[32px] text-[#1D342C]">${product.price} руб.</p>
+                                    <#if basketProductsId?has_content && basketProductsId?seq_contains(product.id)>
+                                        <img src="../static/img/ready.png">
+                                        <#else>
                                     <img class="plus" src="../static/img/plus.png" data-product-id="${product.id}" alt="">
+                                    </#if>
                                 </div>
                             </div>
                         </#if>
-                </#list>
+                    </#list>
                 </div>
                 <p id="snacks" style="font-family: 'MontserratAlternates-Bold';" class="text-[32px] text-[#D5552E] scroll-mt-31">Снеки</p>
                 <div class="grid grid-col-1 w-full mt-[16px]">
                     <#list products as product>
                         <#if product.category == "Снеки">
-                            <div class="w-full h-[413px] bg-[#F0E4CB] rounded-[24px] shadow-xl mb-[32px]">
+                            <div class="w-[374px] mx-auto h-[413px] bg-[#F0E4CB] rounded-[24px] shadow-xl mb-[32px]">
                                 <img class="mx-auto my-[16px]" src="/images/${product.previewImageId}">
                                 <p style="font-family: 'MontserratAlternates-Bold';" class="text-center text-[#D5552E] text-[32px] mb-[16px]">${product.name}</p>
                                 <div class="flex justify-center space-x-[92px] pb-[16px]">
                                     <p style="font-family: 'MontserratAlternates-Bold';" class="text-[32px] text-[#1D342C]">${product.price} руб.</p>
-                                    <img class="plus" src="../static/img/plus.png" data-product-id="${product.id}" alt="">
+                                    <#if basketProductsId?has_content && basketProductsId?seq_contains(product.id)>
+                                        <img src="../static/img/ready.png">
+                                        <#else>
+                                        <img class="plus" src="../static/img/plus.png" data-product-id="${product.id}" alt="">
+                                    </#if>
                                 </div>
                             </div>
                         </#if>
-                </#list>
+                    </#list>
                 </div>
-                <p id="souses" style="font-family: 'MontserratAlternates-Bold';" class="text-[32px] text-[#D5552E] scroll-mt-31">Соусы</p>
+                <p id="snacks" style="font-family: 'MontserratAlternates-Bold';" class="text-[32px] text-[#D5552E] scroll-mt-31">Снеки</p>
                 <div class="grid grid-col-1 w-full mt-[16px]">
                     <#list products as product>
-                        <#if product.category == "Соус">
-                            <div class="w-full h-[413px] bg-[#F0E4CB] rounded-[24px] shadow-xl mb-[32px]">
+                        <#if product.category == "Снеки">
+                            <div class="w-[374px] mx-auto h-[413px] bg-[#F0E4CB] rounded-[24px] shadow-xl mb-[32px]">
                                 <img class="mx-auto my-[16px]" src="/images/${product.previewImageId}">
                                 <p style="font-family: 'MontserratAlternates-Bold';" class="text-center text-[#D5552E] text-[32px] mb-[16px]">${product.name}</p>
                                 <div class="flex justify-center space-x-[92px] pb-[16px]">
                                     <p style="font-family: 'MontserratAlternates-Bold';" class="text-[32px] text-[#1D342C]">${product.price} руб.</p>
-                                    <img class="plus" src="../static/img/plus.png" data-product-id="${product.id}" alt="">
+                                    <#if basketProductsId?has_content && basketProductsId?seq_contains(product.id)>
+                                        <img src="../static/img/ready.png">
+                                        <#else>
+                                        <img class="plus" src="../static/img/plus.png" data-product-id="${product.id}" alt="">
+                                    </#if>
                                 </div>
                             </div>
                         </#if>
                     </#list>
                 </div>
             </div>
-            <script src="../static/js/menu_addtobasket.js"></script>
         </main>
         <div class="flex justify-around items-center w-full h-15 bg-[#F0E4CB] fixed bottom-0 rounded-t-[16px] shadow-xl">
             <a href="/"><img src="/static/img/main.png" alt=""></a>
@@ -112,5 +128,6 @@
             <a href="/basket"><img src="/static/img/basket.png" alt=""></a>
             <a href="/profile"><img src="/static/img/profile.png" alt=""></a>
         </div>
+        <script src="../static/js/menu_addtobasket.js"></script>
     </body>
 </html>

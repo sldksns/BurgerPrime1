@@ -31,6 +31,7 @@ public class OrderController {
         Account account = accountRepository.findByName(username);
         AccountInformation accountInformation = accountInformationRepository.findByAccount(account);
         Order new_order = new Order();
+        new_order.setStatus("В процессе доставки");
         new_order.setAccount(account);
         new_order.setAddress(accountInformation.getAddress());
         Basket basket = basketRepository.findByAccount(account);
@@ -56,11 +57,10 @@ public class OrderController {
                     System.out.println("Invalid format for key: " + key + ", value: " + value);
                 }
             });
+            System.out.println("Products in order before save: " + new_order.getProducts().size());
+
+            orderRepository.save(new_order);
         }
-
-        System.out.println("Products in order before save: " + new_order.getProducts().size());
-
-        orderRepository.save(new_order);
 
 
         return "redirect:/menu";

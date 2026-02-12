@@ -1,6 +1,11 @@
 const address_btn = document.getElementById('address_btn');
+const order_btn = document.getElementById('fake_order_button');
 const modal = document.getElementById('modal');
 address_btn.addEventListener('click', () => {
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+});
+order_btn.addEventListener('click', () => {
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
 });

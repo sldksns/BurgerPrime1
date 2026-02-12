@@ -5,5 +5,7 @@ document.querySelectorAll('.plus').forEach(btn => {
         fetch('/basket/add_product?productId=' + encodeURIComponent(productId), {
             method: 'POST'
         })
+        btn.disabled = true;
+        btn.innerHTML = '<img src="/static/img/ready.png" alt="Loading...">'
     });
 });

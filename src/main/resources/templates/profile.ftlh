@@ -55,7 +55,7 @@
                                     <p class="text-[18px]" style="font-family: 'MontserratAlternates-SemiBold';">Ваши данные</p>
                                 </div>
                             </a>
-                            <a href="">
+                            <a href="/profile/settings">
                                 <div>
                                     <div class="w-full flex justify-center mb-[8px]">
                                         <img src="../static/img/settings.png" alt="">
