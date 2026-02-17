@@ -39,8 +39,10 @@ public class Account implements UserDetails {
         accountInformation.setAccount(this);
         accountInformation.setDisplayed_name(this.name);
         this.account_info = accountInformation;
+        Basket basket = new Basket();
+        basket.setAccount(this);
+        this.basket = basket;
     }
-
     public Account() {
     }
 

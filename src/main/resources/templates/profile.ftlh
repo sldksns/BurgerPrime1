@@ -72,13 +72,13 @@
                                 <img src="../static/img/alt_arrow.png" alt="">
                             </div>
                         </a>
-                        <a href="">
+                        <a href="https://vk.ru/im/convo/-235216715?entrypoint=community_page&tab=all">
                             <div class="flex justify-between items-center px-[16px] bg-[#F0E4CB] w-full h-[57px] rounded-[24px] shadow-lg">
                                 <p style="font-family: 'MontserratAlternates-Bold';" class="text-[18px] text-[#D5552E]">Нужна помощь?</p>
                                 <img src="../static/img/alt_arrow.png" alt="">
                             </div>
                         </a>
-                        <a href="">
+                        <a href="/feedback">
                             <div class="flex justify-between items-center px-[16px] bg-[#F0E4CB] w-full h-[57px] rounded-[24px] shadow-lg">
                                 <p style="font-family: 'MontserratAlternates-Bold';" class="text-[18px] text-[#D5552E]">Оценить сайт</p>
                                 <img src="../static/img/alt_arrow.png" alt="">

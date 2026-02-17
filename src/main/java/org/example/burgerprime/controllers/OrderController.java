@@ -61,8 +61,6 @@ public class OrderController {
 
             orderRepository.save(new_order);
         }
-
-
         return "redirect:/menu";
     }
     @GetMapping("/orders")

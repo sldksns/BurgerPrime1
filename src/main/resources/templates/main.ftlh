@@ -34,18 +34,28 @@
         </header>
         <main class="flex justify-center bg-[#FFF9EE] h-screen w-full pt-15">
             <div class="w-[369px]">
-                <div class="bg-[#1D342C] h-27 w-full mt-[32px] rounded-[24px] shadow-2xl">
-                    <div class="flex h-full justify-between items-center">
-                        <p class="text-white ml-[16px] text-[18px]/5.5">Авторизуйтесь для<br> получения скидки</p>
-                        <img class="mr-[16px]" src="../static/img/arrow.png">
+                <#if isAuthenticated>
+                    <div class="bg-[#F0E4CB] h-27 w-full mt-[32px] rounded-[24px] shadow-2xl">
+                        <div class="flex h-full justify-center items-center">
+                            <p style="font-family: 'MontserratAlternates-Bold';" class="text-[#D5552E] text-[32px]/5.5">Ваша скидка: <span class="text-[#1D342C]">10%</span></p>
+                        </div>
                     </div>
-                </div>
+                    <#else>
+                    <div class="bg-[#1D342C] h-27 w-full mt-[32px] rounded-[24px] shadow-2xl">
+                        <div class="flex h-full justify-between items-center">
+                            <p class="text-white ml-[16px] text-[18px]/5.5">Авторизуйтесь для<br> получения скидки</p>
+                            <img class="mr-[16px]" src="../static/img/arrow.png">
+                        </div>
+                    </div>
+                </#if>
                 <div class="mt-[32px]">
                     <p style="font-family: 'MontserratAlternates-Bold'" class="text-[32px] text-[#D5552E]" style="font-family: 'Montserrat-Bold';">Акции</p>
-                    <div class="flex relative items-center h-[206px] bg-[url(../static/img/banner_bg.png)] mt-[16px] pl-[16px]">
-                        <img class="absolute top-[16px]" src="../static/img/logo.png">
-                        <p style="font-family: 'Montserrat-Bold';" class="text-[28px]/8 text-white">Приведи друга<br><span style="font-family: 'Montserrat-Medium';" class="text-[14px] text-white">Получи большую колу</span></p>
-                    </div>
+                    <a href="/menu">
+                        <div class="flex relative items-center h-[206px] bg-[url(../static/img/banner_bg.png)] mt-[16px] pl-[16px]">
+                            <img class="absolute top-[16px]" src="../static/img/logo.png">
+                            <p style="font-family: 'Montserrat-Bold';" class="text-[28px]/8 text-white">Приведи друга<br><span style="font-family: 'Montserrat-Medium';" class="text-[14px] text-white">Получи большую колу</span></p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </main>

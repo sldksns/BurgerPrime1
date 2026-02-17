@@ -29,7 +29,13 @@ public class AccountController {
     private final AccountRepository accountRepository;
     private final AccountInformationRepository accountInformationRepository;
     @GetMapping("/profile/datas")
-    public String profileData() {
+    public String profileData(Authentication authentication, Model model) {
+        String name = authentication.getName();
+        Account account = accountRepository.findByName(name);
+        AccountInformation accountInformation = accountInformationRepository.findByAccount(account);
+        if (accountInformation != null) {
+            model.addAttribute("accountInformation", accountInformation);
+        }
         return "datas";
     }
     @PostMapping("/account/add_data")

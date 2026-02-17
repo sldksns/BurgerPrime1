@@ -21,7 +21,9 @@ public class IndexController {
     public final ProductRepository productRepository;
     public final AccountRepository accountRepository;
     @GetMapping("/")
-    public String index( Model model) {
+    public String index( Model model, Authentication authentication) {
+        boolean isAuthenticated = authentication != null && authentication.isAuthenticated();
+        model.addAttribute("isAuthenticated", isAuthenticated);
         return "main";
     }
 
