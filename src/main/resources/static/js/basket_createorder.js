@@ -26,7 +26,9 @@ function sendCart() {
                 return response.json();
             }
         })
-
+    document.querySelectorAll('.product-item').forEach(item => {
+        item.remove();
+    });
 }
 
 const order_button = document.getElementById('order_button');
