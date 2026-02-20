@@ -18,19 +18,19 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: false  # Лучше отключить на продакшене
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
         jdbc:
           lob:
-            non_contextual_creation: true  # Важно для Railway
+            non_contextual_creation: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   freemarker:
     expose-request-attributes: true
-    cache: true  # Включить кэширование шаблонов на продакшене
+    cache: true
   security:
     oauth2:
       client:
@@ -41,6 +41,5 @@ spring:
             scope:
               - email
               - profile
-            # Важно для Railway - не указываем redirect-uri, Spring подставит сам
 server:
   port: ${PORT:8080}
