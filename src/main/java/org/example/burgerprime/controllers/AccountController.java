@@ -10,6 +10,7 @@ import org.example.burgerprime.services.Service;
 import org.example.burgerprime.services.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,9 +46,7 @@ public class AccountController {
                           String gender,
                           String email,
                           String date_of_birth) {
-
-        Object principal = authentication.getPrincipal();
-        String username = ((UserDetails) principal).getUsername();
+        String username = authentication.getName();
         Account account = accountRepository.findByName(username);
         AccountInformation existingInfo = accountInformationRepository.findByAccount(account);
 
@@ -104,16 +103,47 @@ public class AccountController {
         return "redirect:/login";
     }
     @GetMapping("/profile")
-    public String profile( Model model, Authentication authentication) {
+    public String profile(Model model, Authentication authentication) {
         Object principal = authentication.getPrincipal();
 
+        String username = null;
+
+        // Для обычных пользователей (form login)
         if (principal instanceof UserDetails) {
-            String username = ((UserDetails) principal).getUsername();
-            Account account = accountRepository.findByName(username);
-            AccountInformation accountInformation = accountInformationRepository.findByAccount(account);
-            model.addAttribute("accountInformation", accountInformation);
-            return "profile";
+            username = ((UserDetails) principal).getUsername();
+            System.out.println("Regular user: " + username);
         }
+        // Для OAuth2 пользователей (Google)
+        else if (principal instanceof OAuth2User) {
+            OAuth2User oauth2User = (OAuth2User) principal;
+            username = oauth2User.getAttribute("email"); // или "name", в зависимости от вашей настройки
+            System.out.println("OAuth2 user: " + username);
+            System.out.println("OAuth2 attributes: " + oauth2User.getAttributes());
+        }
+        // На всякий случай
+        else {
+            System.out.println("Unknown principal type: " + principal.getClass());
+            username = principal.toString();
+        }
+
+        // Находим аккаунт
+        Account account = accountRepository.findByName(username);
+        System.out.println("Account found: " + (account != null ? account.getId() : "null"));
+
+        AccountInformation accountInformation = null;
+
+        if (account != null) {
+            accountInformation = accountInformationRepository.findByAccount(account);
+            System.out.println("AccountInformation found: " + (accountInformation != null));
+        }
+
+        // Всегда добавляем что-то в модель, даже если null
+        model.addAttribute("accountInformation", accountInformation);
+
+        // Для отладки - добавим информацию о типе пользователя
+        model.addAttribute("userType", principal.getClass().getSimpleName());
+        model.addAttribute("username", username);
+
         return "profile";
     }
     @PostMapping("/profile/edit_name")
@@ -128,8 +158,7 @@ public class AccountController {
     }
     @PostMapping("/profile/add_address")
     public String addAddress(Authentication authentication, String address) {
-        Object principal = authentication.getPrincipal();
-        String username = ((UserDetails) principal).getUsername();
+        String username = authentication.getName();
         Account account = accountRepository.findByName(username);
         AccountInformation accountInformation = accountInformationRepository.findByAccount(account);
         accountInformation.setAddress(address);

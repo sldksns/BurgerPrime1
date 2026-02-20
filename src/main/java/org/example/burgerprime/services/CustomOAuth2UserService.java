@@ -1,0 +1,86 @@
+package org.example.burgerprime.services;
+
+import org.example.burgerprime.interfaces.AccountRepository;
+import org.example.burgerprime.models.Account;
+import org.example.burgerprime.models.enums.Role;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+
+@Service
+public class CustomOAuth2UserService extends DefaultOAuth2UserService {
+
+    private final AccountRepository accountRepository;
+
+    public CustomOAuth2UserService(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
+
+    @Override
+    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        OAuth2User oauth2User = super.loadUser(userRequest);
+
+        // Получаем данные от провайдера
+        String registrationId = userRequest.getClientRegistration().getRegistrationId();
+        Map<String, Object> attributes = oauth2User.getAttributes();
+
+        // Извлекаем email (в зависимости от провайдера)
+        String email = oauth2User.getAttribute("email");
+
+        // 1. ПРОВЕРЯЕМ, ЕСТЬ ЛИ ПОЛЬЗОВАТЕЛЬ В БАЗЕ
+        Account existingUser = accountRepository.findByName(email);
+
+        if (existingUser == null) {
+            // Создаем нового пользователя
+            Account newAccount = new Account();
+            newAccount.setName(email);
+            newAccount.setActive(true);
+
+            // Добавляем роль USER (предполагая, что getRoles() возвращает коллекцию)
+            Set<Role> roles = newAccount.getRoles();
+            roles.add(Role.USER);
+            newAccount.setRoles(roles); // если есть сеттер
+
+            // Сохраняем в базу
+            accountRepository.save(newAccount);
+            System.out.println("Создан новый пользователь: " + email);
+
+            // Возвращаем OAuth2User для нового пользователя
+            return new DefaultOAuth2User(
+                    Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")),
+                    attributes,
+                    extractNameAttributeKey(registrationId)
+            );
+        } else {
+            // Пользователь уже существует
+            System.out.println("Найден существующий пользователь: " + existingUser.getName());
+
+            // Получаем роль существующего пользователя
+            Set<Role> userRoles = existingUser.getRoles();
+            String roleString = userRoles.stream()
+                    .findFirst()
+                    .map(Enum::name)
+                    .orElse("USER");
+
+            // Возвращаем OAuth2User для существующего пользователя
+            return new DefaultOAuth2User(
+                    Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + roleString)),
+                    attributes,
+                    extractNameAttributeKey(registrationId)
+            );
+        }
+    }
+
+    private String extractNameAttributeKey(String registrationId) {
+        return "email";
+    }
+}

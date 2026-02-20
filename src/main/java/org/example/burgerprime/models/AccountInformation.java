@@ -17,10 +17,27 @@ public class AccountInformation {
     private String email;
     private String gender;
     private String date_of_birth;
+    private Integer waste;
+    private Integer discount;
     @OneToOne
     @JoinColumn(name = "avatar_id")
     private Image avatar;
     @OneToOne
     @JoinColumn(name = "account_id")
     private Account account;
+    @PrePersist
+    public void initWaste() {
+        this.waste = 0;
+        this.discount = 0;
+    }
+    @PreUpdate
+    public void updateDiscount() {
+        this.discount = (waste != null ? waste / 1000 : 0);
+        if (discount > 20) {
+            discount = 20;
+        }
+    }
+    public void plusToWaste(Order order){
+        this.waste += order.totalPrice();
+    }
 }

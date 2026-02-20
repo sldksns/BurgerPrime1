@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
     <head>
         <meta charset="UTF-8">
-        <title>Main</title>
+        <title>Главная</title>
+        <link rel="icon" href="/static/img/alt_logo 1.png">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <style>
@@ -37,7 +38,7 @@
                 <#if isAuthenticated>
                     <div class="bg-[#F0E4CB] h-27 w-full mt-[32px] rounded-[24px] shadow-2xl">
                         <div class="flex h-full justify-center items-center">
-                            <p style="font-family: 'MontserratAlternates-Bold';" class="text-[#D5552E] text-[32px]/5.5">Ваша скидка: <span class="text-[#1D342C]">10%</span></p>
+                            <p style="font-family: 'MontserratAlternates-Bold';" class="text-[#D5552E] text-[32px]/5.5">Ваша скидка: <span class="text-[#1D342C]">${accountInformation.discount}%</span></p>
                         </div>
                     </div>
                     <#else>

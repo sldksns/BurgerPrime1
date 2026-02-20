@@ -26,8 +26,7 @@ public class OrderController {
 
     @PostMapping("/order")
     public String order(Authentication authentication, @RequestBody Map<String, Object> orderData) {
-        Object principal = authentication.getPrincipal();
-        String username = ((UserDetails) principal).getUsername();
+        String username = authentication.getName();
         Account account = accountRepository.findByName(username);
         AccountInformation accountInformation = accountInformationRepository.findByAccount(account);
         Order new_order = new Order();
@@ -58,15 +57,15 @@ public class OrderController {
                 }
             });
             System.out.println("Products in order before save: " + new_order.getProducts().size());
-
+            accountInformation.plusToWaste(new_order);
+            accountInformationRepository.save(accountInformation);
             orderRepository.save(new_order);
         }
         return "redirect:/menu";
     }
     @GetMapping("/orders")
     public String getOrders(Authentication authentication,Model model){
-        Object principal = authentication.getPrincipal();
-        String username = ((UserDetails) principal).getUsername();
+        String username = authentication.getName();
         Account account = accountRepository.findByName(username);
         model.addAttribute("account", account);
         model.addAttribute("orders", orderRepository.findByAccount(account));

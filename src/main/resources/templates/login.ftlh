@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html class="scroll-smooth" lang="en">
+<html class="scroll-smooth" lang="ru">
     <head>
         <meta charset="UTF-8">
-        <title>Main</title>
+        <title>Вход</title>
+        <link rel="icon" href="/static/img/alt_logo 1.png">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <style>
@@ -48,7 +49,7 @@
                         </form>
                         <div class="w-full space-y-[16px]"></div>
                             <p style="font-family: 'Montserrat-Bold';" class="text-[#D5552E] text-center text-[18px] mt-[16px]">или</p>
-                            <a class="flex justify-between items-center bg-[#1D342C] h-[38px] w-[277px] rounded-[4px] shadow-2xl text-white text-[18px] py-[8px] pl-[29px] pr-[36px] mx-auto mt-[16px]">Войти с помощью<img src="../static/img/google_icon.png"></a>
+                            <a href="/oauth2/authorization/google" class="flex justify-between items-center bg-[#1D342C] h-[38px] w-[277px] rounded-[4px] shadow-2xl text-white text-[18px] py-[8px] pl-[29px] pr-[36px] mx-auto mt-[16px]">Войти с помощью<img src="../static/img/google_icon.png"></a>
                             <p style="font-family: 'Montserrat-Bold';" class=" text-[18px] text-center text-[#D5552E] mt-[16px]">Не зарегистрированы?</p>
                             <div class="w-full flex justify-center">
                             <a style="font-family: 'Montserrat-Bold';" href="/registration" class="text-[#1D342C] text-[18px] mt-[8px]">Зарегистрироваться</a>
